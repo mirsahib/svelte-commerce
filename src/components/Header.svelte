@@ -1,9 +1,15 @@
-<script>
+<script lang="ts">
   import { goto } from "$app/navigation";
   import { ShoppingCart } from "lucide-svelte";
+  import cart from "$store/cart"
   const gotoShoppingCart = () => {
     goto('/shopping-cart')
   };
+  let count:number 
+  cart.subscribe((value)=>{
+    count= value.count
+  })
+
 </script>
 
 <header class="text-gray-600 body-font">
@@ -34,6 +40,8 @@
       on:click={gotoShoppingCart}
       >Cart
       <ShoppingCart size={15} class="ml-3" />
+      <span class="mx-2">item:</span>
+      {count}
     </button>
   </div>
 </header>

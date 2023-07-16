@@ -1,5 +1,14 @@
-<script>
-  import { Trash2 } from "lucide-svelte";
+<script lang="ts" >
+  import type {ProductType} from "$lib/products"  
+  import ProductRow from "$components/ProductRow.svelte";
+  // import { products } from "$lib/products";
+  import cart from "$store/cart";
+  let products:ProductType[] = []
+
+  cart.subscribe(val=>{
+    products = val.products
+  })
+
 </script>
 
 <div class="w-full overflow-x-auto">
@@ -16,38 +25,9 @@
     </thead>
     <tbody>
       <!-- Table rows here -->
-      <tr>
-        <td class="py-2 px-4 border">
-          <!-- Added border class here -->
-          <img
-            src="product-image.jpg"
-            alt="Product"
-            class="h-10 w-10 rounded-full"
-          />
-        </td>
-        <td class="py-2 px-4 border">
-          <!-- Added border class here -->
-          Product Name
-        </td>
-        <td class="py-2 px-4 border">
-          <!-- Added border class here -->
-          $9.99
-        </td>
-        <td class="py-2 px-4 border">
-          <!-- Added border class here -->
-          2
-        </td>
-        <td class="py-2 px-4 border">
-          <!-- Added border class here -->
-          $19.98
-        </td>
-        <td class="py-2 px-4 border">
-          <!-- Added border class here -->
-          <button>
-            <Trash2 />
-          </button>
-        </td>
-      </tr>
+      {#each products as product}
+        <ProductRow {product} />
+      {/each}
     </tbody>
   </table>
 </div>
