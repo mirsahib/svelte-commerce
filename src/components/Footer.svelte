@@ -1,0 +1,1 @@
+<header>Copyright@SveltCommerce 2023</header>
